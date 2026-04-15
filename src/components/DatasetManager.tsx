@@ -38,9 +38,9 @@ export default function DatasetManager() {
       const { data: ds, error } = await supabase.from('datasets').insert({
         user_id: user.id, name: file.name.replace(/\.[^.]+$/, ''), file_name: file.name,
         row_count: summary.rowCount, column_count: summary.columnCount,
-        columns: summary.columns as unknown as Record<string, unknown>,
-        metadata: { missingTotal: summary.missingTotal, duplicateRows: summary.duplicateRows } as Record<string, unknown>,
-      }).select().single();
+        columns: summary.columns as any,
+        metadata: { missingTotal: summary.missingTotal, duplicateRows: summary.duplicateRows } as any,
+      } as any).select().single();
       if (error) throw error;
       setRawData(data);
       setCleanedData([]);
