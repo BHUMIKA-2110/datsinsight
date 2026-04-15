@@ -16,6 +16,29 @@ const CHART_COLORS = [
 export default function DashboardOverview() {
   const { summary, datasetName, activeData, modelResults } = useData();
 
+  const typeDistribution = useMemo(() => {
+    if (!summary) return [];
+    const counts: Record<string, number> = {};
+    summary.columns.forEach(c => { counts[c.type] = (counts[c.type] || 0) + 1; });
+    return Object.entries(counts).map(([name, value]) => ({ name, value }));
+  }, [summary]);
+
+  const missingByCol = useMemo(() => {
+    if (!summary) return [];
+    return summary.columns
+      .filter(c => c.missing > 0)
+      .sort((a, b) => b.missing - a.missing)
+      .slice(0, 8)
+      .map(c => ({ name: c.name, missing: c.missing, pct: Math.round((c.missing / activeData.length) * 100) }));
+  }, [summary, activeData.length]);
+
+  const dataQuality = useMemo(() => {
+    if (!summary) return 100;
+    const totalCells = activeData.length * summary.columnCount;
+    const missingPct = totalCells > 0 ? ((totalCells - summary.missingTotal) / totalCells) * 100 : 100;
+    return Math.round(missingPct);
+  }, [summary, activeData.length]);
+
   if (!summary) {
     return (
       <div className="flex flex-col items-center justify-center h-[60vh] text-muted-foreground animate-fade-in">
