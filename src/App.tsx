@@ -4,10 +4,12 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
+import LandingPage from "@/pages/LandingPage";
 import AuthPage from "@/pages/AuthPage";
 import DashboardLayout from "@/components/DashboardLayout";
 import DashboardOverview from "@/components/DashboardOverview";
 import DatasetManager from "@/components/DatasetManager";
+import DataPreview from "@/components/DataPreview";
 import DataCleaning from "@/components/DataCleaning";
 import EDAPanel from "@/components/EDAPanel";
 import VisualizationPanel from "@/components/VisualizationPanel";
@@ -39,11 +41,12 @@ const App = () => (
       <BrowserRouter>
         <AuthProvider>
           <Routes>
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="/" element={<LandingPage />} />
             <Route path="/auth" element={<PublicRoute><AuthPage /></PublicRoute>} />
             <Route path="/" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
               <Route path="dashboard" element={<DashboardOverview />} />
               <Route path="datasets" element={<DatasetManager />} />
+              <Route path="preview" element={<DataPreview />} />
               <Route path="cleaning" element={<DataCleaning />} />
               <Route path="eda" element={<EDAPanel />} />
               <Route path="visualize" element={<VisualizationPanel />} />
