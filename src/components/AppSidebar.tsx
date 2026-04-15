@@ -1,4 +1,4 @@
-import { BarChart3, Database, Upload, Eraser, Activity, TrendingUp, Brain, FileDown, LogOut } from 'lucide-react';
+import { BarChart3, Database, Upload, Eraser, Activity, TrendingUp, Brain, FileDown, LogOut, Table } from 'lucide-react';
 import { NavLink } from '@/components/NavLink';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLocation } from 'react-router-dom';
@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 const navItems = [
   { title: 'Dashboard', url: '/dashboard', icon: Database },
   { title: 'Datasets', url: '/datasets', icon: Upload },
+  { title: 'Data Preview', url: '/preview', icon: Table },
   { title: 'Data Cleaning', url: '/cleaning', icon: Eraser },
   { title: 'EDA', url: '/eda', icon: Activity },
   { title: 'Visualizations', url: '/visualize', icon: TrendingUp },
