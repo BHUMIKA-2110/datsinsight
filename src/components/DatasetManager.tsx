@@ -131,11 +131,32 @@ export default function DatasetManager() {
         </label>
       </div>
 
+      {/* Sample Datasets */}
+      <Card className="glass-card border-dashed">
+        <CardHeader className="pb-2">
+          <CardTitle className="text-sm font-medium flex items-center gap-2"><Beaker className="h-4 w-4 text-accent" /> Sample Datasets</CardTitle>
+        </CardHeader>
+        <CardContent className="grid sm:grid-cols-2 gap-3">
+          {SAMPLE_DATASETS.map(sd => (
+            <button key={sd.id} className="text-left border rounded-lg p-3 hover:border-primary/40 hover:bg-primary/5 transition-all" onClick={() => {
+              const data = sd.loader();
+              const s = getDatasetSummary(data);
+              setRawData(data); setCleanedData([]); setSummary(s); setDatasetName(sd.name); setDatasetId(null); setModelResults([]);
+              toast({ title: `${sd.name} loaded`, description: `${s.rowCount} rows, ${s.columnCount} columns` });
+            }}>
+              <p className="font-medium text-foreground text-sm">{sd.name}</p>
+              <p className="text-xs text-muted-foreground mt-1">{sd.description}</p>
+              <p className="text-xs text-muted-foreground mt-1">{sd.rows} rows · {sd.cols} cols</p>
+            </button>
+          ))}
+        </CardContent>
+      </Card>
+
       {datasets.length === 0 ? (
         <Card className="glass-card">
           <CardContent className="flex flex-col items-center py-12">
             <FileSpreadsheet className="h-12 w-12 text-muted-foreground/30 mb-3" />
-            <p className="text-muted-foreground text-sm">No datasets yet. Upload your first file!</p>
+            <p className="text-muted-foreground text-sm">No uploaded datasets yet.</p>
           </CardContent>
         </Card>
       ) : (
