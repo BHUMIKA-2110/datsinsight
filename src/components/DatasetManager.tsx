@@ -3,10 +3,11 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useData } from '@/contexts/DataContext';
 import { supabase } from '@/integrations/supabase/client';
 import { parseFile, getDatasetSummary } from '@/lib/dataProcessing';
+import { SAMPLE_DATASETS } from '@/lib/sampleDatasets';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { Upload, FileSpreadsheet, Trash2, Loader2 } from 'lucide-react';
+import { Upload, FileSpreadsheet, Trash2, Loader2, Beaker } from 'lucide-react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 export default function DatasetManager() {
