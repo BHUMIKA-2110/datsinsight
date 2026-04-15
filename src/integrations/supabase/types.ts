@@ -14,7 +14,80 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      analysis_results: {
+        Row: {
+          analysis_type: string
+          created_at: string | null
+          dataset_id: string
+          id: string
+          results: Json | null
+          user_id: string
+        }
+        Insert: {
+          analysis_type: string
+          created_at?: string | null
+          dataset_id: string
+          id?: string
+          results?: Json | null
+          user_id: string
+        }
+        Update: {
+          analysis_type?: string
+          created_at?: string | null
+          dataset_id?: string
+          id?: string
+          results?: Json | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "analysis_results_dataset_id_fkey"
+            columns: ["dataset_id"]
+            isOneToOne: false
+            referencedRelation: "datasets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      datasets: {
+        Row: {
+          column_count: number | null
+          columns: Json | null
+          created_at: string | null
+          file_name: string
+          id: string
+          metadata: Json | null
+          name: string
+          row_count: number | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          column_count?: number | null
+          columns?: Json | null
+          created_at?: string | null
+          file_name: string
+          id?: string
+          metadata?: Json | null
+          name: string
+          row_count?: number | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          column_count?: number | null
+          columns?: Json | null
+          created_at?: string | null
+          file_name?: string
+          id?: string
+          metadata?: Json | null
+          name?: string
+          row_count?: number | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

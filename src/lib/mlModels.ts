@@ -1,5 +1,5 @@
-import SimpleLinearRegression from 'ml-regression-simple-linear';
-import MultivariateLinearRegression from 'ml-regression-multivariate-linear';
+import { SimpleLinearRegression } from 'ml-regression-simple-linear';
+import MLR from 'ml-regression-multivariate-linear';
 import { DecisionTreeClassifier } from 'ml-cart';
 import type { DataRow } from './dataProcessing';
 
