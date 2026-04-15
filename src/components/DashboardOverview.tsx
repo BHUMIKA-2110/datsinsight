@@ -58,25 +58,6 @@ export default function DashboardOverview() {
     { label: 'Duplicates', value: summary.duplicateRows, icon: Copy, color: 'bg-destructive/10 text-destructive' },
   ];
 
-  const typeDistribution = useMemo(() => {
-    const counts: Record<string, number> = {};
-    summary.columns.forEach(c => { counts[c.type] = (counts[c.type] || 0) + 1; });
-    return Object.entries(counts).map(([name, value]) => ({ name, value }));
-  }, [summary]);
-
-  const missingByCol = useMemo(() => {
-    return summary.columns
-      .filter(c => c.missing > 0)
-      .sort((a, b) => b.missing - a.missing)
-      .slice(0, 8)
-      .map(c => ({ name: c.name, missing: c.missing, pct: Math.round((c.missing / activeData.length) * 100) }));
-  }, [summary, activeData.length]);
-
-  const dataQuality = useMemo(() => {
-    const totalCells = activeData.length * summary.columnCount;
-    const missingPct = totalCells > 0 ? ((totalCells - summary.missingTotal) / totalCells) * 100 : 100;
-    return Math.round(missingPct);
-  }, [summary, activeData.length]);
 
   return (
     <div className="space-y-6 animate-fade-in">
