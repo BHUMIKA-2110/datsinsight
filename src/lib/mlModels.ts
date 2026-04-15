@@ -72,7 +72,7 @@ export function trainModel(
     }
     const X = extractNumeric(train, featureCols);
     const Y = train.map(r => [Number(r[targetCol]) || 0]);
-    const model = new MultivariateLinearRegression(X, Y);
+    const model = new MLR(X, Y);
     const predictions = extractNumeric(test, featureCols).map(x => model.predict(x)[0]);
     return {
       modelType, targetColumn: targetCol, featureColumns: featureCols,
