@@ -58,7 +58,7 @@ export default function LandingPage() {
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-6">
-            <Sparkles className="h-3.5 w-3.5" /> MSc Data Analysis Project
+            <Sparkles className="h-3.5 w-3.5" /> Data Analysis Platform
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
             End-to-End Data Analysis<br />
