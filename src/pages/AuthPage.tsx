@@ -18,19 +18,33 @@ export default function AuthPage() {
   const { signIn, signUp } = useAuth();
   const { toast } = useToast();
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (password.length < 6) {
+      toast({ title: 'Password too short', description: 'Password must be at least 6 characters.', variant: 'destructive' });
+      return;
+    }
     setLoading(true);
     try {
       if (isLogin) {
         await signIn(email, password);
         toast({ title: 'Welcome back!' });
+        navigate('/dashboard', { replace: true });
       } else {
         await signUp(email, password);
-        toast({ title: 'Account created!', description: 'Check your email to verify your account.' });
+        toast({ title: 'Account created!', description: 'You can now sign in.' });
+        setIsLogin(true);
       }
     } catch (err: unknown) {
-      toast({ title: 'Error', description: (err as Error).message, variant: 'destructive' });
+      const msg = (err as Error).message || 'Something went wrong';
+      const friendly = msg.toLowerCase().includes('invalid login')
+        ? 'Incorrect email or password. If you just signed up, try signing in again.'
+        : msg.toLowerCase().includes('already registered') || msg.toLowerCase().includes('user already')
+        ? 'This email is already registered. Please sign in instead.'
+        : msg;
+      toast({ title: isLogin ? 'Sign in failed' : 'Sign up failed', description: friendly, variant: 'destructive' });
     } finally {
       setLoading(false);
     }
