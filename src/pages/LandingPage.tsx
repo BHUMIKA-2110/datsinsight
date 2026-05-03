@@ -221,7 +221,7 @@ export default function LandingPage() {
             </div>
             <span className="font-medium">DataInsight Pro</span>
           </div>
-          <p>MSc Data Analysis Project © {new Date().getFullYear()}</p>
+          <p>DataInsight Pro © {new Date().getFullYear()}</p>
         </div>
       </footer>
     </div>
